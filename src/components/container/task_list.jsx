@@ -23,7 +23,7 @@ const TaskListComponent = () => {
     ),
   ];
   //* Component state
-  const [tasks, setTask] = useState(defaultTask);
+  const [tasks, setTasks] = useState(defaultTask);
   const [loading, setLoading] = useState(true);
 
   //* Life cycle control using effectState
@@ -36,6 +36,30 @@ const TaskListComponent = () => {
       console.log('TaskList component is going to be unmounted');
     };
   }, [tasks]);
+
+  //* This function toggles completed status of the task
+  //* This function is related to the complete icon
+  function completedTask(task) {
+    console.log(Object.values(task));
+    const index = tasks.indexOf(task);
+    const tempTask = [...tasks];
+
+    //* In this point the status prop is toggled
+    tempTask[index].status = !tempTask[index].status;
+    //* useState hook to change our prop value
+    setTasks(tempTask);
+  }
+
+  //* this function remove the task
+  //* this function is trelated to the delete button
+  function removeTask(task) {
+    console.log(Object.values(task));
+    const index = tasks.indexOf(task);
+    const tempTask = [...tasks];
+
+    //* In this point the task is removed
+    tempTask.splice(index, 1);
+  }
 
   //* Component body to get rendered
   return (
@@ -64,7 +88,12 @@ const TaskListComponent = () => {
               <Tbody>
                 {tasks.map((task, index) => {
                   return (
-                    <TaskComponent key={index} task={task}></TaskComponent>
+                    <TaskComponent
+                      key={index}
+                      task={task}
+                      complete={completedTask}
+                      remove={removeTask}
+                    ></TaskComponent>
                   );
                 })}
               </Tbody>
