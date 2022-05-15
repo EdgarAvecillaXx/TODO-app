@@ -6,10 +6,10 @@ import {
   Box,
   FormControl,
   FormLabel,
-  HStack,
   IconButton,
   Input,
   Select,
+  Stack,
   VStack,
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
@@ -31,11 +31,20 @@ const TaskForm = ({ add }) => {
     add(newTask);
   }
   return (
-    <Box borderWidth="2px" margin="1em" borderRadius="lg" p='1em'>
+    <Box
+      borderWidth="2px"
+      margin="1em auto"
+      borderRadius="lg"
+      p="1em"
+      width="100%"
+    >
       <FormControl as="fieldset" onSubmit={addTask}>
-        <FormLabel as="legend" fontWeight='bold'> Add a new Task</FormLabel>
-        <HStack spacing="24px">
-          <VStack width="20%">
+        <FormLabel as="legend" fontWeight="bold">
+          {' '}
+          Add a new Task
+        </FormLabel>
+        <Stack direction={['column', 'column', 'column', 'row']} spacing="24px">
+          <VStack width={('20%', '20%', '20%', '100%')}>
             <FormLabel htmlFor="inputName" alignSelf="self-start">
               Name:
             </FormLabel>
@@ -48,7 +57,7 @@ const TaskForm = ({ add }) => {
               autoFocus
             />
           </VStack>
-          <VStack width="55%">
+          <VStack width={('55%', '55%', '55%', '100%')}>
             <FormLabel htmlFor="inputDesc" alignSelf="self-start">
               Description:
             </FormLabel>
@@ -60,7 +69,7 @@ const TaskForm = ({ add }) => {
               required={true}
             />
           </VStack>
-          <VStack width="15%">
+          <VStack width={('15%', '15%', '15%', '100%')}>
             <FormLabel alignSelf="self-start">Priority level:</FormLabel>
             <Select ref={levelRef} variant="flushed" id="selectPriority">
               <option value={LEVELS.level0}>Non-Priority</option>
@@ -69,8 +78,12 @@ const TaskForm = ({ add }) => {
               <option value={LEVELS.level3}>Urgent</option>
             </Select>
           </VStack>
-          <IconButton icon={<AddIcon />} colorScheme="green" type='submit'></IconButton>
-        </HStack>
+          <IconButton
+            icon={<AddIcon />}
+            colorScheme="green"
+            type="submit"
+          ></IconButton>
+        </Stack>
       </FormControl>
     </Box>
   );
