@@ -12,7 +12,7 @@ import { LEVELS } from '../../models/levels.enum';
 //* Styles
 import '../../styles/task.scss';
 
-const TaskComponent = ({ task }) => {
+const TaskComponent = ({ task, complete, remove }) => {
   useEffect(() => {
     console.log('Created Task');
     return () => {
@@ -57,17 +57,29 @@ const TaskComponent = ({ task }) => {
 
   function taskCompletedIcon() {
     if (task.status === true) {
-      return <Icon as={MdCheckBox} color='green.400' boxSize='2em' />;
+      return (
+        <Icon
+          onClick={() => complete(task)}
+          as={MdCheckBox}
+          color="green.400"
+          boxSize="2em"
+        />
+      );
     } else {
       return (
-        <Icon as={MdCheckBoxOutlineBlank} color="gray.500" boxSize="2em" />
+        <Icon
+          onClick={() => complete(task)}
+          as={MdCheckBoxOutlineBlank}
+          color="gray.500"
+          boxSize="2em"
+        />
       );
     }
   }
 
   return (
     <Tr>
-      <Td fontWeight='bold'>
+      <Td fontWeight="bold">
         <span className="ms-2">{task.name}</span>
       </Td>
       <Td>
@@ -77,6 +89,7 @@ const TaskComponent = ({ task }) => {
       <Td className="align-middle">
         {taskCompletedIcon()}
         <IconButton
+          onClick={() => remove(task)}
           colorScheme="red"
           size="sm"
           m="2.5"
@@ -89,7 +102,9 @@ const TaskComponent = ({ task }) => {
 };
 
 TaskComponent.propTypes = {
-  task: PropTypes.instanceOf(Task),
+  task: PropTypes.instanceOf(Task).isRequired,
+  complete: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
 export default TaskComponent;
