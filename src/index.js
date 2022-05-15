@@ -1,3 +1,10 @@
+//* Bootstrap library
+//! NOTE: bootstrap is above import all, so our styles doesn't get overrride
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+//* Own styles must be below bootstrap
+
+//* Chakra-ui & react nodes
 import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
