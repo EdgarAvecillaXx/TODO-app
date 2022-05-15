@@ -59,6 +59,8 @@ const TaskListComponent = () => {
 
     //* In this point the task is removed
     tempTask.splice(index, 1);
+    //* Update our task list with useState hook
+    setTasks(tempTask);
   }
 
   //* Component body to get rendered
