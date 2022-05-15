@@ -106,3 +106,7 @@ const TaskListComponent = () => {
 };
 
 export default TaskListComponent;
+
+//! Stills pending loading screen function
+//! adding this function will let te page refresh and show changes
+//! when adding or removing a task
