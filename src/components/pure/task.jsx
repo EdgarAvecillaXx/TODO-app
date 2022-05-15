@@ -80,13 +80,13 @@ const TaskComponent = ({ task, complete, remove }) => {
   return (
     <Tr>
       <Td fontWeight="bold">
-        <span className="ms-2">{task.name}</span>
+        <span >{task.name}</span>
       </Td>
       <Td>
         <span>{task.description}</span>
       </Td>
       <Td className="align-middle">{taskLevelBadge()}</Td>
-      <Td className="align-middle">
+      <Td textAlign={['center', 'center', 'center', 'left']}>
         {taskCompletedIcon()}
         <IconButton
           onClick={() => remove(task)}
