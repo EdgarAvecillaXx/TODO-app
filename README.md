@@ -25,9 +25,7 @@ Here is stablished our proyect, in components we will see the father and child c
 For the models we will se js scripts for modeling the data needed
 For styles we have simple styles for our tasks elements
 
-## Demo
-
-If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://anabelisa.co/tips-para-hacer-un-buen-readme-md/)
+If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect]()
 
 ## Pre-requirements
 
