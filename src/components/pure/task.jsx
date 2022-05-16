@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+//* Chakra UI & React modules
+//* import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, IconButton, Td, Tr } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
@@ -12,14 +13,21 @@ import { LEVELS } from '../../models/levels.enum';
 //* Styles
 import '../../styles/task.scss';
 
+//* Here start the Component
+//* recieve task model, complete func, remove func
 const TaskComponent = ({ task, complete, remove }) => {
+  //*useEffect Hook if its needed
+  /*
   useEffect(() => {
     console.log('Created Task');
     return () => {
       console.log(`Task: ${task.name} is going to be unmounted`);
     };
   });
+  */
 
+  //* Priority badge Function
+  //* Indicates the priority level for the task
   function taskLevelBadge() {
     switch (task.level) {
       case LEVELS.level0:
@@ -55,10 +63,14 @@ const TaskComponent = ({ task, complete, remove }) => {
     }
   }
 
+  //* Task completed Icon function
+  //* Here we established icon style depending on our task status
+  //* false == incompleted icon, true == completed icon
   function taskCompletedIcon() {
     if (task.status === true) {
       return (
         <Icon
+          className="task_cursor"
           onClick={() => complete(task)}
           as={MdCheckBox}
           color="green.400"
@@ -68,6 +80,7 @@ const TaskComponent = ({ task, complete, remove }) => {
     } else {
       return (
         <Icon
+          className="task_cursor"
           onClick={() => complete(task)}
           as={MdCheckBoxOutlineBlank}
           color="gray.500"
@@ -77,10 +90,12 @@ const TaskComponent = ({ task, complete, remove }) => {
     }
   }
 
+  //* Render block
   return (
-    <Tr>
+    //* starts task table
+    <Tr className={task.status ? 'task_completed' : 'task_pending'}>
       <Td fontWeight="bold">
-        <span >{task.name}</span>
+        <span>{task.name}</span>
       </Td>
       <Td>
         <span>{task.description}</span>
@@ -89,6 +104,7 @@ const TaskComponent = ({ task, complete, remove }) => {
       <Td textAlign={['center', 'center', 'center', 'left']}>
         {taskCompletedIcon()}
         <IconButton
+          className="task_cursor"
           onClick={() => remove(task)}
           colorScheme="red"
           size="sm"
