@@ -1,46 +1,64 @@
-import { Box, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
+//* Chakra UI & react modules
+import {
+  Box,
+  Container,
+  Heading,
+  Table,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
+
+//* Child Components
+import TaskComponent from '../pure/task';
+import TaskForm from '../pure/forms/taskForm';
+
+//* Data models
 import { LEVELS } from '../../models/levels.enum';
 import { Task } from '../../models/todo.class';
-import TaskComponent from '../pure/task';
+import { getAllData } from '../../models/fetch';
 
-//* import styles
-import '../../styles/task__list.scss';
+//* Styles
+import '../../styles/task.scss';
 
+//* Here starts Component
 const TaskListComponent = () => {
-  const defaultTask = [
-    new Task(
-      'Pasear perro',
-      'Llevar al perro a pasear 20 min',
-      true,
-      LEVELS.level0
-    ),
-    new Task(
-      'Hacer tarea',
-      'Terminar la tarea de ingles',
-      false,
-      LEVELS.level1
-    ),
-  ];
+  let defaultTask = [];
   //* Component state
   const [tasks, setTasks] = useState(defaultTask);
-  const [loading, setLoading] = useState(true);
 
   //* Life cycle control using effectState
   useEffect(() => {
-    console.log('Task State has been modified');
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    return () => {
-      console.log('TaskList component is going to be unmounted');
-    };
-  }, [tasks]);
+    ObtainTasks();
+  }, []);
+
+  //* Function to obtain allData from JSONplaceholder
+  const ObtainTasks = () => {
+    //* call fetch model
+    getAllData().then(response => {
+      console.log(Object.values(response));
+      //* enter values in an temp array,
+      const array = Object.values(response);
+      //* mapping fuction, to obtain a Task element for each index
+      const arrayFinal = array.map(element => {
+        return new Task(
+          element.id,
+          element.title,
+          element.completed,
+          LEVELS.level0
+        );
+      });
+      console.log(`es Array(): ${Array.isArray(array)}`);
+      //* modify our tasks state
+      setTasks(arrayFinal);
+    });
+  };
 
   //* This function toggles completed status of the task
   //* This function is related to the complete icon
   function completedTask(task) {
-    console.log(Object.values(task));
     const index = tasks.indexOf(task);
     const tempTask = [...tasks];
 
@@ -51,7 +69,7 @@ const TaskListComponent = () => {
   }
 
   //* this function remove the task
-  //* this function is trelated to the delete button
+  //* this function is related to the delete button
   function removeTask(task) {
     console.log(Object.values(task));
     const index = tasks.indexOf(task);
@@ -63,44 +81,78 @@ const TaskListComponent = () => {
     setTasks(tempTask);
   }
 
+  //* this function creates a new task element
+  //* this function is related to taskFrom component
+  function createTask(task) {
+    console.log(Object.values(task));
+    const tempTask = [...tasks];
+
+    //* Here the new task is added
+    tempTask.push(task);
+    //* Create a new task with useState hook
+    setTasks(tempTask);
+  }
+
+  //* Table task structure
+  const TaskTable = () => {
+    return (
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            <Th scope="col">Title</Th>
+            <Th scope="col">description</Th>
+            <Th scope="col">priority</Th>
+            <Th scope="col">Actions</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {tasks.map((task, index) => {
+            return (
+              <TaskComponent
+                key={index}
+                task={task}
+                complete={completedTask}
+                remove={removeTask}
+              ></TaskComponent>
+            );
+          })}
+        </Tbody>
+      </Table>
+    );
+  };
+
+  //* ternary element in case there are no tasks
+  const taskList =
+    tasks.length > 0 ? (
+      <TaskTable />
+    ) : (
+      <Container>
+        <Heading fontSize="3xl" letterSpacing="2px" p="1em 1em 1em 0em">
+          'There are no tasks to show'
+        </Heading>
+        <Heading fontSize="2xl" letterSpacing="1px" p="1em 1em 1em 0em">
+          'Please create a new one'
+        </Heading>
+      </Container>
+    );
+
   //* Component body to get rendered
   return (
     <div>
       <div className="col-12">
+        <TaskForm add={createTask}></TaskForm>
         <Box borderWidth="2px" borderRadius="lg" overflow="hidden">
           {/* Header (Title) */}
           <Box borderWidth="1px" p="1em">
-            <h5>To Do:</h5>
+            <Heading as="h1">To Do:</Heading>
           </Box>
           {/* Body (tastks table) */}
+          {taskList}
           <div
             className="card-body p-2"
             data-mdb-perfect-scrollbar="true"
             style={{ position: 'relative', height: '400px' }}
-          >
-            <Table variant="simple">
-              <Thead>
-                <Tr>
-                  <Th scope="col">Title</Th>
-                  <Th scope="col">description</Th>
-                  <Th scope="col">priority</Th>
-                  <Th scope="col">Actions</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {tasks.map((task, index) => {
-                  return (
-                    <TaskComponent
-                      key={index}
-                      task={task}
-                      complete={completedTask}
-                      remove={removeTask}
-                    ></TaskComponent>
-                  );
-                })}
-              </Tbody>
-            </Table>
-          </div>
+          ></div>
         </Box>
       </div>
     </div>
@@ -108,7 +160,3 @@ const TaskListComponent = () => {
 };
 
 export default TaskListComponent;
-
-//! Stills pending loading screen function
-//! adding this function will let te page refresh and show changes
-//! when adding or removing a task
