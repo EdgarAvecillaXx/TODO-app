@@ -1,8 +1,9 @@
 //* Js model for  taskComponent
+//* Exported to Task component
 export class Task {
   name;
   description;
-  status;
+  status = false;
   level;
 
   constructor(name, desc, status, level) {

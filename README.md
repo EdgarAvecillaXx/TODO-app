@@ -1,68 +1,77 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ToDo React APP
 
-## Available Scripts
+This is a To Do app made with React, it is mainly structured with Chakra UI and Bootstrap.
+We have a adding task section and a view section to see and interact with our tasks.
 
-In the project directory, you can run:
+## Content
 
-### `npm start`
+This proyect has a simple estructure in wich we have 3 principal folders:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- node_modules
+- public
+- src
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The first folder are our needed folders they stablished with react, and in case we add a new package the module will be installed in the node_modules folder.
 
-### `npm test`
+### SRC folder
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For the src folder we have:
 
-### `npm run build`
+- Components
+- models
+- styles
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Here is stablished our proyect, in components we will see the father and child components.
+For the models we will se js scripts for modeling the data needed
+For styles we have simple styles for our tasks elements
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Demo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://anabelisa.co/tips-para-hacer-un-buen-readme-md/)
 
-### `npm run eject`
+## Pre-requirements
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The proyect mainly uses React framework, but it was also installed a few estra packages.
+In case yop needed I suggest to install the next libraries:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### SASS
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    npm i --save node-sass
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Chakra-ui
 
-## Learn More
+    npm i --save @chakra-ui/react @chakra-ui/theme @chakra-ui/theme-tools react-icons
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Bootstrap
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    npm i --save bootstrap bootstrap bootstrap-icons
 
-### Code Splitting
+## Installation
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+To run this proyect just type and execute
 
-### Analyzing the Bundle Size
+```bash
+npm  start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Preview
 
-### Making a Progressive Web App
+![](/darkPreview.png)
+![](/wPreview.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Notes
 
-### Advanced Configuration
+It´s importante to teel that almost all styles like dark theme, postion, etc., was declared with
+Chakra UI library, so many elements will have stablished the style with props in the labels like
+this:
+<example colorScheme='green' ></example>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+In a few ones you will see a prop like this:
 
-### Deployment
+    colorSchemE={['green', 'green', 'green', 'red']}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+this is a prop to established responsive design, in the first three breakpoint we have green color,
+from 4th break will be red, Chakra UI stablished breakpoint based in bootstrap.
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+To see the complete documentation of this folow the next link:
+[Chakra-ui](https://chakra-ui.com/docs/styled-system/features/responsive-styles)
