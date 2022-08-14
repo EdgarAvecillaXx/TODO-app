@@ -30,19 +30,9 @@ If you want to see the demo of this proyect deployed, you can visit [Demo of the
 ## Pre-requirements
 
 The proyect mainly uses React framework, but it was also installed a few estra packages.
-In case yop needed I suggest to install the next libraries:
+I suggest to install the dependencies:
 
-#### SASS
-
-    npm i --save node-sass
-
-#### Chakra-ui
-
-    npm i --save @chakra-ui/react @chakra-ui/theme @chakra-ui/theme-tools react-icons
-
-#### Bootstrap
-
-    npm i --save bootstrap bootstrap bootstrap-icons
+    npm i or npm install
 
 ## Installation
 
@@ -59,7 +49,7 @@ npm  start
 
 ### Notes
 
-It´s importante to teel that almost all styles like dark theme, postion, etc., was declared with
+It´s important to know that almost all styles like dark theme, postion, etc., was declared with
 Chakra UI library, so many elements will have stablished the style with props in the labels like
 this:
 <example colorScheme='green' ></example>
